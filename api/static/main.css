@@ -40,3 +40,31 @@
     padding: 20px;
     margin-top: 10px;
 }
+
+/*login-button*/
+.btn_login{
+    align-content: center;
+}
+
+/*Forgot password and create account*/
+.login-accounts-container{
+    position: relative;
+    height: 30%;
+}
+
+.login-forgot{
+    text-align: center;
+    margin-top: 0%;
+    left: 29%;
+    position: absolute;
+    font-size:15px;
+    color: #1B4E6A;
+}
+
+.login-create{
+    text-align: center;
+    top: 20px;
+    position: absolute;
+    font-size:15px;
+    color: #1B4E6A;
+}
