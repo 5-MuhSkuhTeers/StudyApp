@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}"> 
@@ -17,9 +16,7 @@
         <div id="login-box" class="card mb-4 box-shadow" style="width: 26rem;">
 
             <div class="card-header">
-
-                <legend class="my-0 font-weight-normal" ">{{legend}} Login</legend>
-
+                <h3 class="my-0 font-weight-normal">Login</h3>
             </div>
 
             <div class="card-body px-3 py-3">
@@ -40,7 +37,6 @@
                     {% endif %}
                 </div>
 
-
                 <div class="card-title">
                     {{ form.password.label(class="form-control-label") }}
                     {% if form.password.errors %}
@@ -55,16 +51,9 @@
                     {% else %}
                     {{ form.password(class="form-control form-control-lg") }}
                     {% endif %}
-                    {% if legend == "User" %}
-                    <div class="form-check pt-2">
-                        {{ form.remember(class="form-check-input") }}
-                        {{ form.remember.label(class="form-check-label") }}
-                    </div>
-                    {% else %}
-                    {% endif %}
                 </div>
 
-                <div class="form-group pt-2" ">
+                <div class="form-group pt-2">
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>
             </div>
