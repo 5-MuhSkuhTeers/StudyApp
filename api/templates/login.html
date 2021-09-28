@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}"> 
 </head>
 
 <div class="login-header">
@@ -13,17 +14,17 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
 
-        <div class="card mb-4 box-shadow" style="width: 36.1rem;">
+        <div id="login-box" class="card mb-4 box-shadow" style="width: 26rem;">
 
             <div class="card-header">
 
-                <legend class="my-0 font-weight-normal">{{legend}} Login</legend>
+                <legend class="my-0 font-weight-normal" ">{{legend}} Login</legend>
 
             </div>
 
             <div class="card-body px-3 py-3">
 
-                <div class="card-title">
+                <div  class="card-title">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
                     {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -63,7 +64,7 @@
                     {% endif %}
                 </div>
 
-                <div class="form-group pt-2">
+                <div class="form-group pt-2" ">
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>
             </div>
