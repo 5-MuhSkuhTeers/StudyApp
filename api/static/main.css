@@ -1,0 +1,62 @@
+
+/* Styling for the bar on the login screen*/
+.login-header{
+    background-color: rgba(74,215,245,0.34);
+    
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+    margin: auto;
+    margin-bottom: 25px;
+
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: normal;
+
+    
+    width: 100%;
+    height: 100px;    
+}
+
+#login-box{
+    background-color: rgba(154,204,251,0.44);
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+/*login-button*/
+.btn_login{
+    align-content: center;
+}
+
+.login-forgot{
+    font-size:15px;
+    color: #1B4E6A;
+}
+
+.login-create{
+    font-size:15px;
+    color: #1B4E6A;
+}
+
+
+.btn{
+    background-color: rgba(27,78,106,0.5);
+    width: 146px;
+    height: 57px;
+    outline: none !important;
+    color: white;
+}
+
+.btn:hover{
+    background-color: rgba(27,78,106,0.7);
+    color: white;
+}
+
