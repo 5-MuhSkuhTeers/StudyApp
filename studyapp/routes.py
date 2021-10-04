@@ -1,6 +1,6 @@
-from api import server, bcrypt
-from api.models import Users
-from api.forms import LoginForm, RegisterForm
+from studyapp import server, bcrypt
+from studyapp.models import Users
+from studyapp.forms import LoginForm, RegisterForm
 from flask import render_template, flash
 
 

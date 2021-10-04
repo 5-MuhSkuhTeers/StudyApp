@@ -1,5 +1,5 @@
 import sys
-from api import server, db
+from studyapp import server, db
 
 if __name__ == "__main__":
     db.create_all()
