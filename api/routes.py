@@ -10,7 +10,7 @@ def home():
     return render_template("login.html",form=form)
 
 @app.route("/create-account", methods=['GET','POST'])
-def home():
+def createAccount():
     form = accountCreationForm()
     if form.validate_on_submit():
         flash("account creation successful",'success')
