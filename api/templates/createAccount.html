@@ -9,6 +9,87 @@
 <div class="login-header">
     StudyApp
 </div>
-<div>
-    <h1>Create Account</h1>
+<div class="card-deck d-flex justify-content-center">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <div id="login-box" class="card mb-2 box-shadow border-0" style="width: 26rem; border-radius: 12%">
+            <div class="card-body px-3 py-1">
+                <div class="mb-3" align="center">
+                    <h2 class="font-weight-normal" style="color: #1B4E6A">Create Account</h2>
+                </div>
+                <!--email-->
+                <div class="card-title">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+
+                    <div class="invalid feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!--password-->
+                <div class="card-title">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+
+                    <div class="invalid feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!--confirm password-->
+
+                <div class="card-title">
+                    {{ form.confirmPassword.label(class="form-control-label") }}
+                    {% if form.confirmPassword.errors %}
+                    {{ form.confirmPassword(class="form-control form-control-lg is-invalid") }}
+
+                    <div class="invalid feedback">
+                        {% for error in form.confirmPassword.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.confirmPassword(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" align="center">
+                    <div class="btn_login">
+                        {{form.submit(class="btn")}}
+                    </div>
+                </div>
+
+                <div class="mb-3" align="center">
+                    <a class="login-forgot" href="https://www.google.com/search?q=test&rlz=1C1SQJL_enUS888US888&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjM9M6IoaLzAhVNGFkFHZCCCCEQ_AUoA3oECAEQBQ&biw=843&bih=905&dpr=1">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <div align="center">
+                    <p style="font-size: 15px; color: #0000EE;">
+                        Want to organize your school life?
+                        <a class="login-create" href="{{ url_for('createAccount') }}">
+                            Create an account!
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </form>
 </div>
