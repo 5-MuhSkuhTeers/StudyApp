@@ -57,7 +57,7 @@
                     {% if form.confirm.errors %}
                     {{ form.confirm(class="form-control form-control-lg is-invalid") }}
 
-                    <div class="invalid feedback" style="color: red;">
+                    <div class="invalid feedback" style="color: rgb(168, 0, 0);">
                         {% for error in form.confirm.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
@@ -74,17 +74,11 @@
                     </div>
                 </div>
 
-                <div class="mb-3" align="center">
-                    <a class="login-forgot" href="https://www.google.com/search?q=test&rlz=1C1SQJL_enUS888US888&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjM9M6IoaLzAhVNGFkFHZCCCCEQ_AUoA3oECAEQBQ&biw=843&bih=905&dpr=1">
-                        Forgot password?
-                    </a>
-                </div>
-
                 <div align="center">
                     <p style="font-size: 15px; color: #0000EE;">
-                        Want to organize your school life?
-                        <a class="login-create" href="{{ url_for('createAccount') }}">
-                            Create an account!
+                        Already a member?
+                        <a class="login-create" href="{{ url_for('home') }}">
+                            Log in
                         </a>
                     </p>
                 </div>
