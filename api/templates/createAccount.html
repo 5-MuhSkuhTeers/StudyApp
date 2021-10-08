@@ -53,18 +53,18 @@
                 <!--confirm password-->
 
                 <div class="card-title">
-                    {{ form.confirmPassword.label(class="form-control-label") }}
-                    {% if form.confirmPassword.errors %}
-                    {{ form.confirmPassword(class="form-control form-control-lg is-invalid") }}
+                    {{ form.confirm.label(class="form-control-label") }}
+                    {% if form.confirm.errors %}
+                    {{ form.confirm(class="form-control form-control-lg is-invalid") }}
 
-                    <div class="invalid feedback">
-                        {% for error in form.confirmPassword.errors %}
+                    <div class="invalid feedback" style="color: red;">
+                        {% for error in form.confirm.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
 
                     {% else %}
-                    {{ form.confirmPassword(class="form-control form-control-lg") }}
+                    {{ form.confirm(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
