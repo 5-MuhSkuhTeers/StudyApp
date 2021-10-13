@@ -18,22 +18,6 @@
                 <div class="mb-3" align="center">
                     <h2 class="font-weight-normal" style="color: #1B4E6A">Create Account</h2>
                 </div>
-                <!--name-->
-                <div class="card-title">
-                    {{ form.name.label(class="form-control-label") }}
-                    {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-lg is-invalid") }}
-
-                    <div class="invalid feedback">
-                        {% for error in form.name.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    {% else %}
-                    {{ form.name(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
                 <!--email-->
                 <div class="card-title">
                     {{ form.email.label(class="form-control-label") }}
@@ -69,18 +53,18 @@
                 <!--confirm password-->
 
                 <div class="card-title">
-                    {{ form.confirm_password.label(class="form-control-label") }}
-                    {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    {{ form.confirm.label(class="form-control-label") }}
+                    {% if form.confirm.errors %}
+                    {{ form.confirm(class="form-control form-control-lg is-invalid") }}
 
                     <div class="invalid feedback" style="color: rgb(168, 0, 0);">
-                        {% for error in form.confirm_password.errors %}
+                        {% for error in form.confirm.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
 
                     {% else %}
-                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {{ form.confirm(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
