@@ -8,3 +8,8 @@ def home():
     if form.validate_on_submit():
         flash("login successful",'success')
     return render_template("login.html",form=form)
+
+@app.route("/acc_pg", methods=['GET','POST'])
+def home():
+    
+    return render_template("account_page.html")
