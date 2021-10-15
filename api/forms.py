@@ -15,4 +15,15 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField(label='Confirm Password',
                                      validators=[DataRequired(), EqualTo('password',message='Passwords Must Match')])
     submit = SubmitField('Sign Up')
+class RequestForgotPasswordForm (FlaskForm):
+    email = StringField(label='Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+class ForgotPasswordForm (FlaskForm):
+    password = PasswordField(label='New Password', validators=[DataRequired()])
+    confirm = PasswordField('Confirm New Password', validators=[
+        DataRequired(),
+        EqualTo('password',message='Passwords Must Match')
+    ])
+    submit = SubmitField('Login')
 
