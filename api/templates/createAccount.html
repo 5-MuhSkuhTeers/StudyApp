@@ -9,6 +9,17 @@
 <div class="login-header">
     StudyApp
 </div>
+<div class="container" style="width:55%;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
 <div class="card-deck d-flex justify-content-center">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -93,7 +104,7 @@
                 <div align="center">
                     <p style="font-size: 15px; color: #0000EE;">
                         Already a member?
-                        <a class="login-create" href="{{ url_for('home') }}">
+                        <a class="login-create" href="{{ url_for('login') }}">
                             Log in
                         </a>
                     </p>

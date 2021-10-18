@@ -2,6 +2,7 @@ import os, secrets, bcrypt
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 
 url = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ \
@@ -18,6 +19,15 @@ server.config['SQLALCHEMY_DATABASE_URI'] = url
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(server)
 bcrypt = Bcrypt(server)
+login_manager = LoginManager(app=server)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
+
+
+from api.models import User
+@login_manager.user_loader
+def load_user(user_id):
+    return User.find_by_id(user_id)
 
 
 from api import routes

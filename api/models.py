@@ -1,11 +1,14 @@
 from api import db
+from flask import current_app
+from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as serializer
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(30), nullable=False, unique=True)
     name = db.Column(db.String(40), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     assignments = db.relationship('Assignment', lazy=True)
@@ -30,6 +33,18 @@ class User(db.Model):
     def find_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
 
+    def reset_token(self, expire=1800):
+        token = serializer(current_app.secret_key, expire)
+        return token.dumps({'email':self.email}).decode('utf-8')
+
+    @staticmethod
+    def verify_token(token):
+        s = serializer(current_app.secret_key)
+        try:
+            email = s.loads(token)['email']
+        except:
+            return None
+        return User.find_by_email(email)
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
