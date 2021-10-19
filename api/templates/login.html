@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}"> 
@@ -22,7 +24,7 @@
     {% endwith %}
 </div>
 
-<div class="card-deck justify-content-center">
+<div class="card-body d-flex justify-content-center">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
 

@@ -18,12 +18,12 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
 
-class RequestForgotPasswordForm (FlaskForm):
+class RequestForgotPasswordForm(FlaskForm):
     email = StringField(label='Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
 
-class ForgotPasswordForm (FlaskForm):
+class ForgotPasswordForm(FlaskForm):
     password = PasswordField(label='New Password', validators=[DataRequired()])
     confirm = PasswordField('Confirm New Password', validators=[
         DataRequired(),
@@ -31,3 +31,7 @@ class ForgotPasswordForm (FlaskForm):
     ])
     submit = SubmitField('Login')
 
+
+class UpdateAccountForm(FlaskForm):
+    status = StringField(label='Update status', validators=[DataRequired()])
+    submit = SubmitField('Update')

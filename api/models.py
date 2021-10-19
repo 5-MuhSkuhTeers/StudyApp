@@ -10,7 +10,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False, unique=True)
     name = db.Column(db.String(40), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+    status = db.Column(db.String(80), nullable=False, default='Hello There!')
     assignments = db.relationship('Assignment', lazy=True)
     courses = db.relationship('Course', lazy=True)
 
@@ -45,6 +46,7 @@ class User(db.Model, UserMixin):
         except:
             return None
         return User.find_by_email(email)
+
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'

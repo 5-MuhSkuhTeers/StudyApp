@@ -1,15 +1,16 @@
 from api import server, bcrypt, login_manager
 from api.models import *
 from api.forms import *
-from flask import render_template, flash, redirect, get_flashed_messages
+from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
+from api.email import send_reset_email
 
 
 @server.route("/", methods=['GET', 'POST'])
 @server.route("/login", methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect('account')
+    """if current_user.is_authenticated:
+        return redirect('account')"""
     get_flashed_messages()
     form = LoginForm()
     if form.validate_on_submit():
@@ -27,10 +28,17 @@ def login():
     return render_template("login.html",form=form)
 
 
+@server.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
 @server.route("/create-account", methods=['GET','POST'])
 def createAccount():
-    if current_user.is_authenticated:
-        return redirect('account')
+    """if current_user.is_authenticated:
+        return redirect('account')"""
     form = RegisterForm()
     if form.validate_on_submit():
         if User.find_by_email(form.email.data):
@@ -49,7 +57,12 @@ def createAccount():
 def requestforgotPassword():
     form = RequestForgotPasswordForm()
     if form.validate_on_submit():
-        flash("login successful",'success')
+        email = form.email.data
+        if User.find_by_email(email):
+            token = User.find_by_email(email).reset_token()
+            send_reset_email(email, token)
+        flash("If the email matches our records, you will receive further instructions", 'info')
+        return redirect(url_for('login'))
     return render_template("requestResetPassword.html",form=form)
 #also this
 
@@ -57,22 +70,30 @@ def requestforgotPassword():
 @server.route("/reset-password/<token>", methods=['GET','POST'])
 def forgotPassword(token):
     if current_user.is_authenticated:
-        return redirect('account')
+        return redirect(url_for('account'))
     user = User.verify_token(token)
     if not user:
         flash("Your token has expired", 'danger')
-        return redirect('requestforgotPassword')
+        return redirect(url_for('requestforgotPassword'))
     form = ForgotPasswordForm()
     if form.validate_on_submit():
-        user.password = bcrypt.generate_password_hash(form.password.data)
+        user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         db.session.commit()
-        flash("Password updated successfully!",'success')
-        return redirect('login')
+        flash("Password changed successfully!",'success')
+        return redirect(url_for('login'))
     return render_template("resetPassword.html",form=form)
 
 
 @server.route("/account", methods=['GET','POST'])
 @login_required
 def account():
-    logout_user()
-    return render_template("account.html")
+    form = UpdateAccountForm()
+    name = current_user.name
+    status = current_user.status
+    if form.validate_on_submit():
+        user = User.find_by_id(current_user.id)
+        user.status = form.status.data
+        db.session.commit()
+        current_user.status = form.status.data
+        return redirect(url_for("account"))
+    return render_template("account.html", form=form, name=name, status=status)
