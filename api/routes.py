@@ -9,8 +9,8 @@ from api.email import send_reset_email
 @server.route("/", methods=['GET', 'POST'])
 @server.route("/login", methods=['GET', 'POST'])
 def login():
-    """if current_user.is_authenticated:
-        return redirect('account')"""
+    if current_user.is_authenticated:
+        return redirect('account')
     get_flashed_messages()
     form = LoginForm()
     if form.validate_on_submit():
@@ -37,8 +37,8 @@ def logout():
 
 @server.route("/create-account", methods=['GET','POST'])
 def createAccount():
-    """if current_user.is_authenticated:
-        return redirect('account')"""
+    if current_user.is_authenticated:
+        return redirect('account')
     form = RegisterForm()
     if form.validate_on_submit():
         if User.find_by_email(form.email.data):
@@ -55,6 +55,8 @@ def createAccount():
 
 @server.route("/request-reset-password", methods=['GET','POST'])
 def requestforgotPassword():
+    if current_user.is_authenticated:
+        return redirect('account')
     form = RequestForgotPasswordForm()
     if form.validate_on_submit():
         email = form.email.data
@@ -97,3 +99,20 @@ def account():
         current_user.status = form.status.data
         return redirect(url_for("account"))
     return render_template("account.html", form=form, name=name, status=status)
+
+
+@server.route("/change-password", methods=['GET','POST'])
+@login_required
+def changePassword():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = User.find_by_id(current_user.id)
+        if bcrypt.check_password_hash(user.password, form.current.data):
+            user.password = bcrypt.generate_password_hash(form.new.data).decode('utf-8')
+            db.session.commit()
+            flash('Password changed successfully', 'success')
+            return redirect(url_for('account'))
+        else:
+            flash("Incorrect password entered", 'danger')
+            return redirect(url_for('changePassword'))
+    return render_template('changePassword.html', form=form)

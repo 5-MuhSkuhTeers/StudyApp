@@ -35,3 +35,13 @@ class ForgotPasswordForm(FlaskForm):
 class UpdateAccountForm(FlaskForm):
     status = StringField(label='Update status', validators=[DataRequired()])
     submit = SubmitField('Update')
+
+
+class ChangePasswordForm(FlaskForm):
+    current = PasswordField(label='Current Password', validators=[DataRequired()])
+    new = PasswordField(label='New Password', validators=[DataRequired()])
+    confirm = PasswordField('Confirm New Password', validators=[
+        DataRequired(),
+        EqualTo('new',message='Passwords Must Match')
+    ])
+    submit = SubmitField('Login')
