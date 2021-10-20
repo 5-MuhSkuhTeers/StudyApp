@@ -37,6 +37,10 @@
     align-content: center;
 }
 
+.btn_reset{
+    align-content: center;
+}
+
 .login-forgot{
     font-size:15px;
     color: #1B4E6A;
@@ -50,7 +54,6 @@
 
 .btn{
     background-color: rgba(27,78,106,0.5);
-    width: 146px;
     height: 57px;
     outline: none !important;
     color: white;
