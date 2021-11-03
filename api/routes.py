@@ -10,7 +10,7 @@ from api.email import send_reset_email
 @server.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect('account')
+        return redirect('home')
     get_flashed_messages()
     form = LoginForm()
     if form.validate_on_submit():
@@ -18,7 +18,7 @@ def login():
             user = User.find_by_email(form.email.data)
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect('account')
+                return redirect('home')
             else:
                 flash("Incorrect password entered", 'danger')
                 return redirect('login')
@@ -99,6 +99,15 @@ def account():
         current_user.status = form.status.data
         return redirect(url_for("account"))
     return render_template("account.html", form=form, name=name, status=status)
+
+
+@server.route("/home", methods=['GET','POST'])
+@login_required
+def home():
+    #form = UpdateAccountForm()
+    name = current_user.name
+    status = current_user.status
+    return render_template("homeScreen.html", name=name, status=status)
 
 
 @server.route("/change-password", methods=['GET','POST'])

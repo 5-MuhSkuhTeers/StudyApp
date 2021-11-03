@@ -1,8 +1,11 @@
 import requests, os
 from flask import url_for
 
-MAILGUN_DOMAIN = os.environ['MAILGUN_TEST_DOMAIN']
-MAILGUN_API_KEY = os.environ['MAILGUN_TEST_API']
+MAILGUN_DOMAIN = os.environ['MAILGUN_TEST_DOMAIN'] if 'MAILGUN_TEST_DOMAIN' in os.environ \
+    else 'DOMAIN'
+MAILGUN_API_KEY = os.environ['MAILGUN_TEST_API'] if 'MAILGUN_TEST_API' in os.environ \
+    else 'API_KEY'
+
 
 
 def send_reset_email(user, token):
