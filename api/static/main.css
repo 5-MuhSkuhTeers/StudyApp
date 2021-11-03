@@ -80,7 +80,7 @@
 
 #home-nav-bar{
     background-color: rgba(74,215,245,0.34) !important; 
-    width: 100% !important;
+    
 }
 
 .container{
@@ -119,6 +119,6 @@
 }
 
 #container-header{
-    margin:auto;
-    margin-top: 0px;
+    margin:auto !important;
+    margin-top: 0px !important;
 }

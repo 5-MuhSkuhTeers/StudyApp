@@ -10,12 +10,12 @@
 
 <nav id= "home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>-->
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+      <ul class="navbar-nav mr-auto navbar-custom">
         <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -25,15 +25,15 @@
       </ul>
 
       <a id ="nav_log_btn" class="nav-link btn-outline-secondary my-2 my-sm-0 my-lg-0" href="{{ url_for('logout') }}">Log Out</a>
-    </div>
+    <!--</div>-->
   </nav>
 
 <div id ="calendar-container" class="container">
-    <h1 id="container-header">Calendar</h1>
+    <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Calendar</h1>
 </div>
 
 <div id ="todo-container" class="container">
-    <h1 id="container-header">To-do</h1>
+    <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">To-do</h1>
 </div>
 
 
