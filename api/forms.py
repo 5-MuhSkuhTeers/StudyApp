@@ -45,3 +45,10 @@ class ChangePasswordForm(FlaskForm):
         EqualTo('new',message='Passwords Must Match')
     ])
     submit = SubmitField('Change Password')
+
+class AddTaskForm(FlaskForm):
+    taskName = StringField(label='Task Name', validators=[DataRequired()])
+    className = StringField(label='Class', validators=[DataRequired()])
+    dueDate = StringField(label='Due Date', validators=[DataRequired()])
+    dueTime = StringField(label='Due Time', validators=[DataRequired()])
+    submit = SubmitField('Add Task')
