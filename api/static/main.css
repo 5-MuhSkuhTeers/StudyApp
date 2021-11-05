@@ -123,23 +123,41 @@
 }
 
 #container-header{
+    display:inline-block;
     margin:auto;
     margin-top: 2% !important;
     width: 50%;
-    min-width: 520px !important;
-    float:left;
-    text-align: center;
+    /*min-width: 520px !important;*/
+    /*float:left;*/
+    /*text-align: center;*/
     margin-left: 4%;
     
 }
 
 #todo-header{
+    display: inline-block;
     margin:auto;
     margin-top: 2% !important;
     width:30%;
     margin-right: 4%;
-    float:right;
-    text-align: center;
+    margin-left: 4%;
+    /*float:right;*/
+}
+
+#add-buttons{
+    margin:auto;
+    margin-top: 2% !important;
+    margin-right: 4%;
+    float: right;
+}
+
+#class-head-button{
+    margin-left: 4%;
+}
+
+#todo-head-button{
+    margin-right: 4%;
+    
 }
 
 .datatable tr{
@@ -153,4 +171,5 @@
     padding: 0%;
     
 }
+
 
