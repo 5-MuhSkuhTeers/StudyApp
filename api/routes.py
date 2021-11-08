@@ -16,10 +16,14 @@ def login():
     if form.validate_on_submit():
         if User.find_by_email(form.email.data):
             user = User.find_by_email(form.email.data)
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect('account')
-            else:
+            try:
+                if bcrypt.check_password_hash(user.password, form.password.data):
+                    login_user(user)
+                    return redirect('account')
+                else:
+                    flash("Incorrect password entered", 'danger')
+                    return redirect('login')
+            except:
                 flash("Incorrect password entered", 'danger')
                 return redirect('login')
         else:
@@ -116,3 +120,13 @@ def changePassword():
             flash("Incorrect password entered", 'danger')
             return redirect(url_for('changePassword'))
     return render_template('changePassword.html', form=form)
+
+
+@server.route("/account/delete", methods=['GET','POST'])
+@login_required
+def delete_account():
+    if current_user.is_authenticated:
+        user = User.find_by_id(current_user.id)
+        user.delete_from_db()
+        flash('Account deleted successfully', 'success')
+    return redirect(url_for('login'))
