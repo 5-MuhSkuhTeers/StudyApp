@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
 </head>
 
 <nav id= "home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +39,82 @@
 <div id="home-page-headers" style="width: 100vw; min-width: 870px;">
   <div id="class-head-button" style="min-width: 520px; width: 50%; float:left "> 
     <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>
-    <button id="add-buttons">Add Class</button>
+    <button class='btn' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+
+	<!--Add class modal-->
+	<div class="modal fade" id="addClassModal" role="dialog">
+		<div class="modal-dialog">
+    
+			<!-- Modal content-->
+			<div class="modal-content rounded-50 border-0">
+			 <form method="POST" action="">
+			    {{ form.hidden_tag() }}
+			  	<div class="modal-header">
+					<h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Class</h1>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+			  	</div>
+			 
+			  	<div class="modal-body">
+				
+
+					<div class="card-title">
+						{{ form.className.label(class="form-control-label") }}
+						{% if form.className.errors %}
+						{{ form.className(class="form-control form-control-lg is-invalid") }}
+	
+						<div class="invalid feedback">
+							{% for error in form.className.errors %}
+							<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+	
+						{% else %}
+						{{ form.className(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+	
+					<div class="card-title">
+						{{ form.startTime.label(class="form-control-label") }}
+						{% if form.startTime.errors %}
+						{{ form.startTime(class="form-control form-control-lg is-invalid") }}
+	
+						<div class="invalid feedback">
+							{% for error in form.startTime.errors %}
+							<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+	
+						{% else %}
+						{{ form.startTime(class="form-control form-control-lg") }}
+						{% endif %}
+					</div
+					<div class="card-title">
+						{{ form.endTime.label(class="form-control-label") }}
+						{% if form.endTime.errors %}
+						{{ form.endTime(class="form-control form-control-lg is-invalid") }}
+	
+						<div class="invalid feedback">
+							{% for error in form.endTime.errors %}
+							<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+	
+						{% else %}
+						{{ form.endTime(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group" align="center">
+						<div class="btn_login">
+							{{form.submit(class="btn")}}
+						</div>
+					</div>
+
+			</form>
+		</div>
+			
+		</div>
+	</div>
+
   </div>
   <div id="todo-head-button" style="width: 30%; float:right">
     <h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
@@ -171,9 +254,4 @@
 <div id ="todo-container" class="container">
     
 </div>
-</div>
-
-
-
-    
 </div>

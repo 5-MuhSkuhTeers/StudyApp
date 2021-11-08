@@ -45,3 +45,9 @@ class ChangePasswordForm(FlaskForm):
         EqualTo('new',message='Passwords Must Match')
     ])
     submit = SubmitField('Change Password')
+
+class AddClassForm(FlaskForm):
+    className = StringField(label='Class Name', validators=[DataRequired()])
+    startTime = StringField(label='Start Time', validators=[DataRequired()])
+    endTime = StringField(label='End Time', validators=[DataRequired()])
+    submit = SubmitField('Add Class')
