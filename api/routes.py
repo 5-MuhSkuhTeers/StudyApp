@@ -104,10 +104,11 @@ def account():
 @server.route("/home", methods=['GET','POST'])
 @login_required
 def home():
-    #form = UpdateAccountForm()
+    form = AddClassForm()
+    form2 = AddTaskForm()
     name = current_user.name
     status = current_user.status
-    return render_template("homeScreen.html", name=name, status=status)
+    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status)
 
 
 @server.route("/change-password", methods=['GET','POST'])
