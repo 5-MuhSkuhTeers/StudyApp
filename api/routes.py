@@ -4,6 +4,7 @@ from api.forms import *
 from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
 from api.email import send_reset_email
+from api.models import User
 
 
 @server.route("/", methods=['GET', 'POST'])
@@ -107,6 +108,7 @@ def home():
     form = AddClassForm()
     name = current_user.name
     status = current_user.status
+    courses = current_user.courses
     return render_template("homeScreen.html", form=form, name=name, status=status)
 
 

@@ -87,7 +87,7 @@
 						{% else %}
 						{{ form.startTime(class="form-control form-control-lg") }}
 						{% endif %}
-					</div
+					</div>
 					<div class="card-title">
 						{{ form.endTime.label(class="form-control-label") }}
 						{% if form.endTime.errors %}
@@ -102,6 +102,28 @@
 						{% else %}
 						{{ form.endTime(class="form-control form-control-lg") }}
 						{% endif %}
+					</div>
+
+
+                    <div class="card-title">
+						{{ form.M.label(class="form-control-label") }}
+						{{ form.M() }}
+					</div>
+                    <div class="card-title">
+						{{ form.T.label(class="form-control-label") }}
+						{{ form.T() }}
+					</div>
+                    <div class="card-title">
+						{{ form.W.label(class="form-control-label") }}
+						{{ form.W() }}
+					</div>
+                    <div class="card-title">
+						{{ form.Th.label(class="form-control-label") }}
+						{{ form.Th() }}
+					</div>
+                    <div class="card-title">
+						{{ form.F.label(class="form-control-label") }}
+						{{ form.F() }}
 					</div>
 					<div class="form-group" align="center">
 						<div class="btn_login">
