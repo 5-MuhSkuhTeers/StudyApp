@@ -2,6 +2,7 @@ from api import db
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as serializer
+from datetime import datetime, time
 
 
 class User(db.Model, UserMixin):
@@ -53,7 +54,9 @@ class Assignment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    due_date = db.Column(db.String(10), nullable=False)
+    course = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    due_date = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
         return f"Assignment('{self.user_id}','{self.due_date}')"
@@ -73,6 +76,9 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     course_num = db.Column(db.String(10), nullable=False)
+    day_of_week = db.Column(db.String(1), nullable=False)
+    start_time = db.Column(db.Time, nullable=False)
+    end_time = db.Column(db.Time, nullable=False)
 
     def __repr__(self):
         return f"Course('{self.user_id}','{self.course_num}')"
