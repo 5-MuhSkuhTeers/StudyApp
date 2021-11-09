@@ -4,6 +4,7 @@ from api.forms import *
 from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
 from api.email import send_reset_email
+from api.Notifcations import AssigmentNotifcations as AN
 
 
 @server.route("/", methods=['GET', 'POST'])
@@ -108,6 +109,13 @@ def home():
     form2 = AddTaskForm()
     name = current_user.name
     status = current_user.status
+    # get user email
+    user = User.find_by_id(current_user.id)
+    # set Notifications for form2 =>> taskForm
+    # date format YYYY-MM-DD; time format HH:MM
+    if form2.validate_on_submit:
+        notify = AN(form2.taskName, form2.dueDate, form2.dueTime, user.email)
+        notify.setNotifications()
     return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status)
 
 
