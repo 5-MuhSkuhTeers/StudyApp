@@ -108,7 +108,11 @@ def home():
     form = AddClassForm()
     name = current_user.name
     status = current_user.status
-    courses = current_user.courses
+    if form.validate_on_submit():
+        day = f'{int(form.M.data)}{int(form.T.data)}{int(form.W.data)}{int(form.Th.data)}{int(form.F.data)}'
+        id = current_user.id
+        Course(user_id=id, course_num=form.className.data, day_of_week=day,
+               start_time=form.startTime.data, end_time=form.endTime.data).save_to_db()
     return render_template("homeScreen.html", form=form, name=name, status=status)
 
 

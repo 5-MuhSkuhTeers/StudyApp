@@ -1,4 +1,3 @@
-
 from api import db
 from flask import current_app
 from flask_login import UserMixin
@@ -49,6 +48,33 @@ class User(db.Model, UserMixin):
             return None
         return User.find_by_email(email)
 
+    def course_schedule(self):
+        courses = []
+        for i in self.courses:
+            courses.append([i.course_num,i.day_of_week,i.start_time])
+        courses.sort(key=lambda x: x[2])
+        schedule = [[],[],[],[],[]]
+        for i in courses:
+            if i[1][0] == '1':
+                schedule[0].append(i[0])
+            if i[1][1] == '1':
+                schedule[1].append(i[0])
+            if i[1][2] == '1':
+                schedule[2].append(i[0])
+            if i[1][3] == '1':
+                schedule[3].append(i[0])
+            if i[1][4] == '1':
+                schedule[4].append(i[0])
+        max_day = max([len(i) for i in schedule])
+        matrix = [[[] for m1 in range(5)] for m2 in range(max_day)]
+        for i in range(5):
+            for j in range(max_day):
+                try:
+                    matrix[j][i] = schedule[i][j]
+                except:
+                    matrix[j][i] = ""
+        return matrix
+
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
@@ -77,12 +103,12 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     course_num = db.Column(db.String(10), nullable=False)
-    day_of_week = db.Column(db.String(1), nullable=False)
+    day_of_week = db.Column(db.String(5), nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
 
     def __repr__(self):
-        return f"Course('{self.user_id}','{self.course_num}')"
+        return f"Course('{self.user_id}','{self.course_num}','{self.start_time}')"
 
     def save_to_db(self):
         db.session.add(self)

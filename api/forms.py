@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.fields.html5 import TimeField
 
 
 class LoginForm(FlaskForm):
@@ -48,8 +49,8 @@ class ChangePasswordForm(FlaskForm):
 
 class AddClassForm(FlaskForm):
     className = StringField(label='Class Name', validators=[DataRequired()])
-    startTime = StringField(label='Start Time', validators=[DataRequired()])
-    endTime = StringField(label='End Time', validators=[DataRequired()])
+    startTime = TimeField(label='Start Time', validators=[DataRequired()])
+    endTime = TimeField(label='End Time', validators=[DataRequired()])
     M = BooleanField(label='Monday')
     T = BooleanField(label='Tuesday')
     W = BooleanField(label='Wednesday')
