@@ -74,7 +74,8 @@ class AssigmentNotifcations:
         postHTTP = f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages"
         auth=("api", MAILGUN_API_KEY)
 
-        # if due in less than an hour send the email right now !!! 
+        # if due in less than an hour send the email right now !!!
+        data = {}
         if duration < 60:
           data = {
             "from": f"Study App <mailgun@{MAILGUN_DOMAIN}>",
@@ -90,5 +91,5 @@ class AssigmentNotifcations:
             "text": f"You are receiving this because a request has been made to reimnd you that an assigment ({self.taskName}) is due soon-- on {self.dueDate} at {self.dueTime}-- please check your planner to vertify!",
             "o:deliverytime": f"{inject}"
           }
-        return requests.post(postHTTP, auth=auth, data = data)
+        return requests.post(postHTTP, auth=auth, data=data)
 
