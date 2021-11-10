@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
-from wtforms.fields.html5 import TimeField
+from wtforms.fields.html5 import TimeField, DateField, DateTimeField
 
 
 class LoginForm(FlaskForm):
@@ -57,9 +57,11 @@ class AddClassForm(FlaskForm):
     Th = BooleanField(label='Thursday')
     F = BooleanField(label='Friday')
     submit = SubmitField('Add Class')
+
+
 class AddTaskForm(FlaskForm):
-    taskName = StringField(label='Task Name', validators=[DataRequired()])
+    taskName = StringField(label='Assignment', validators=[DataRequired()])
     className = StringField(label='Class', validators=[DataRequired()])
-    dueDate = StringField(label='Due Date (YYYY-MM-DD)', validators=[DataRequired()])
-    dueTime = StringField(label='Due Time (HH:MM)', validators=[DataRequired()])
+    dueDate = DateField(label='Due Date')
+    dueTime = TimeField(label='Due Time')
     submit = SubmitField('Add')

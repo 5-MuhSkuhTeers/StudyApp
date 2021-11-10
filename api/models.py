@@ -2,7 +2,7 @@ from api import db
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as serializer
-from datetime import datetime, time
+from datetime import datetime, timedelta
 
 
 class User(db.Model, UserMixin):
@@ -75,6 +75,13 @@ class User(db.Model, UserMixin):
                     matrix[j][i] = ""
         return matrix
 
+    def user_assignments(self):
+        work = []
+        for i in self.assignments:
+            if i.due_date > datetime.now() - timedelta(hours=1):
+                work.append([i.name,i.due_date])
+        return work
+
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
@@ -86,7 +93,7 @@ class Assignment(db.Model):
     due_date = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
-        return f"Assignment('{self.user_id}','{self.due_date}')"
+        return f"Assignment('{self.user_id}','{self.due_date}','{self.name})"
 
     def save_to_db(self):
         db.session.add(self)

@@ -3,9 +3,8 @@ from api.models import *
 from api.forms import *
 from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
-from api.email import send_reset_email
+from api.email import send_reset_email, setNotifications
 from api.models import User
-from api.Notifcations import AssigmentNotifcations as AN
 
 
 @server.route("/", methods=['GET', 'POST'])
@@ -113,6 +112,7 @@ def home():
     # get user email
     user = User.find_by_id(current_user.id)
     classes = User.find_by_email(current_user.email).course_schedule()
+    assignments = User.find_by_email(current_user.email).user_assignments()
     if form.validate_on_submit():
         day = f'{int(form.M.data)}{int(form.T.data)}{int(form.W.data)}{int(form.Th.data)}{int(form.F.data)}'
         id = current_user.id
@@ -120,12 +120,18 @@ def home():
                start_time=form.startTime.data, end_time=form.endTime.data).save_to_db()
         return redirect(url_for('home'))
     if form2.validate_on_submit():
-        notify = AN(form2.taskName, form2.dueDate, form2.dueTime, user.email)
-        notify.setNotifications()
+        email = current_user.email
+        task_name = form2.taskName.data
+        due_date = form2.dueDate.data
+        due_time = form2.dueTime.data
+        setNotifications(user=email,taskName=task_name,dueDate=due_date,dueTime=due_time)
         id = current_user.id
-        Assignment(user_id=id, course=form.className.data, name=taskName.data,
-                  due_date=form.dueDate.data).save_to_db()
-    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes)
+        dueDateTime = datetime.combine(due_date, due_time)
+        Assignment(user_id=id, course=form2.className.data, name=task_name,
+                  due_date=dueDateTime).save_to_db()
+        print(User.find_by_email('conansum@buffalo.edu').user_assignments())
+        return redirect(url_for('home'))
+    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
 
 
 @server.route("/change-password", methods=['GET','POST'])
