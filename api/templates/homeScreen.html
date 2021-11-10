@@ -1,268 +1,185 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
-	
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
 </head>
 
-<nav id= "home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav id="home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
+	<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>-->
-  
-    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-      <ul class="navbar-nav mr-auto navbar-custom">
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('account') }}">Account</a>
-        </li>
-      </ul>
 
-      <a id ="nav_log_btn" class="nav-link btn-outline-secondary my-2 my-sm-0 my-lg-0" href="{{ url_for('logout') }}">Log Out</a>
-    <!--</div>-->
-  </nav>
+	<!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+	<ul class="navbar-nav mr-auto navbar-custom">
+		<li class="nav-item active">
+			<a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+		</li>
+		<li class="nav-item active">
+			<a class="nav-link" href="{{ url_for('account') }}">Account</a>
+		</li>
+	</ul>
+
+	<a id="nav_log_btn" class="nav-link btn-outline-secondary my-2 my-sm-0 my-lg-0" href="{{ url_for('logout') }}">Log
+		Out</a>
+	<!--</div>-->
+</nav>
 
 <div id="home-page-headers" style="width: 100vw; min-width: 870px;">
-  <div id="class-head-button" style="min-width: 520px; width: 50%; float:left "> 
-    <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>
-    <button class='btn' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+	<div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
+		<h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>
+		<button class='btn' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
 
-	<!--Add class modal-->
-	<div class="modal fade" id="addClassModal" role="dialog">
-		<div class="modal-dialog">
-    
-			<!-- Modal content-->
-			<div class="modal-content rounded-50 border-0">
-			 <form method="POST" action="">
-			    {{ form.hidden_tag() }}
-			  	<div class="modal-header">
-					<h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Class</h1>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-			  	</div>
-			 
-			  	<div class="modal-body">
-				
+		<!--Add class modal-->
+		<div class="modal fade" id="addClassModal" role="dialog">
+			<div class="modal-dialog">
 
-					<div class="card-title">
-						{{ form.className.label(class="form-control-label") }}
-						{% if form.className.errors %}
-						{{ form.className(class="form-control form-control-lg is-invalid") }}
-	
-						<div class="invalid feedback">
-							{% for error in form.className.errors %}
-							<span>{{ error }}</span>
-							{% endfor %}
+				<!-- Modal content-->
+				<div class="modal-content rounded-50 border-0">
+					<form method="POST" action="">
+						{{ form.hidden_tag() }}
+						<div class="modal-header">
+							<h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Class</h1>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-	
-						{% else %}
-						{{ form.className(class="form-control form-control-lg") }}
-						{% endif %}
-					</div>
-	
-					<div class="card-title">
-						{{ form.startTime.label(class="form-control-label") }}
-						{% if form.startTime.errors %}
-						{{ form.startTime(class="form-control form-control-lg is-invalid") }}
-	
-						<div class="invalid feedback">
-							{% for error in form.startTime.errors %}
-							<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-	
-						{% else %}
-						{{ form.startTime(class="form-control form-control-lg") }}
-						{% endif %}
-					</div>
-					<div class="card-title">
-						{{ form.endTime.label(class="form-control-label") }}
-						{% if form.endTime.errors %}
-						{{ form.endTime(class="form-control form-control-lg is-invalid") }}
-	
-						<div class="invalid feedback">
-							{% for error in form.endTime.errors %}
-							<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-	
-						{% else %}
-						{{ form.endTime(class="form-control form-control-lg") }}
-						{% endif %}
-					</div>
+
+						<div class="modal-body">
 
 
-                    <div class="card-title">
-						{{ form.M.label(class="form-control-label") }}
-						{{ form.M() }}
-					</div>
-                    <div class="card-title">
-						{{ form.T.label(class="form-control-label") }}
-						{{ form.T() }}
-					</div>
-                    <div class="card-title">
-						{{ form.W.label(class="form-control-label") }}
-						{{ form.W() }}
-					</div>
-                    <div class="card-title">
-						{{ form.Th.label(class="form-control-label") }}
-						{{ form.Th() }}
-					</div>
-                    <div class="card-title">
-						{{ form.F.label(class="form-control-label") }}
-						{{ form.F() }}
-					</div>
-					<div class="form-group" align="center">
-						<div class="btn_login">
-							{{form.submit(class="btn")}}
-						</div>
-					</div>
+							<div class="card-title">
+								{{ form.className.label(class="form-control-label") }}
+								{% if form.className.errors %}
+								{{ form.className(class="form-control form-control-lg is-invalid") }}
 
-			</form>
+								<div class="invalid feedback">
+									{% for error in form.className.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+
+								{% else %}
+								{{ form.className(class="form-control form-control-lg") }}
+								{% endif %}
+							</div>
+
+							<div class="card-title">
+								{{ form.startTime.label(class="form-control-label") }}
+								{% if form.startTime.errors %}
+								{{ form.startTime(class="form-control form-control-lg is-invalid") }}
+
+								<div class="invalid feedback">
+									{% for error in form.startTime.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+
+								{% else %}
+								{{ form.startTime(class="form-control form-control-lg") }}
+								{% endif %}
+							</div>
+							<div class="card-title">
+								{{ form.endTime.label(class="form-control-label") }}
+								{% if form.endTime.errors %}
+								{{ form.endTime(class="form-control form-control-lg is-invalid") }}
+
+								<div class="invalid feedback">
+									{% for error in form.endTime.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+
+								{% else %}
+								{{ form.endTime(class="form-control form-control-lg") }}
+								{% endif %}
+							</div>
+
+
+							<div class="card-title">
+								{{ form.M.label(class="form-control-label") }}
+								{{ form.M() }}
+							</div>
+							<div class="card-title">
+								{{ form.T.label(class="form-control-label") }}
+								{{ form.T() }}
+							</div>
+							<div class="card-title">
+								{{ form.W.label(class="form-control-label") }}
+								{{ form.W() }}
+							</div>
+							<div class="card-title">
+								{{ form.Th.label(class="form-control-label") }}
+								{{ form.Th() }}
+							</div>
+							<div class="card-title">
+								{{ form.F.label(class="form-control-label") }}
+								{{ form.F() }}
+							</div>
+							<div class="form-group" align="center">
+								<div class="btn_login">
+									{{form.submit(class="btn")}}
+								</div>
+							</div>
+
+					</form>
+				</div>
+
+			</div>
 		</div>
-			
-		</div>
+
 	</div>
+</div>
+<div id="todo-head-button" style="width: 30%; float:right">
+	<h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
+	<button id="add-buttons">Add Task</button>
+</div>
 
-  </div>
-  <div id="todo-head-button" style="width: 30%; float:right">
-    <h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
-    <button id="add-buttons">Add Task</button>
-  </div>
-  
 </div>
 <div style="min-width: 870px;">
-  <div id ="calendar-container" class="container">
-    
-    <!--<div id="days" class="row">
-      <div class="col-2">
-        Time
-      </div>
-      <div class="col">
-        Monday
-      </div>
-      <div class="col">
-        Tuesday
-      </div>
-      <div class="col">
-        Wednesday
-      </div>
-      <div class="col">
-        Thursday
-      </div>
-      <div class="col">
-        Friday
-      </div>
-    </div>-->
-    <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Monday</th>
-				<th>Tuesday</th>
-				<th>Wednesday</th>
-				<th>Thursday</th>
-				<th>Friday</th>
-			</tr>
-		</thead>
-		<tbody>
-			
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				  <td> </td>
-			</tr>
-			
-		</tbody>
-	</table>
-</div>
+	<div id="calendar-container" class="container">
+
+		<table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Monday</th>
+					<th>Tuesday</th>
+					<th>Wednesday</th>
+					<th>Thursday</th>
+					<th>Friday</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in classes %}
+					<tr>
+						<td> {{ i[0] }} </td>
+						<td> {{ i[1] }} </td>
+						<td> {{ i[2] }} </td>
+						<td> {{ i[3] }} </td>
+						<td> {{ i[4] }} </td>
+					</tr>
+				{% endfor %}
+				
+			</tbody>
+		</table>
+	</div>
 
 
-<div id ="todo-container" class="container">
-    
-</div>
+	<div id="todo-container" class="container">
+
+	</div>
 </div>
