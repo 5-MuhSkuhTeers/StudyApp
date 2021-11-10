@@ -26,11 +26,11 @@ class AssigmentNotifcations:
     def parseDate(self):
         yr,mt,dt = self.dueDate.split("-")
         date = datetime.datetime(int(yr), int(mt), int(dt))
-        return date
+        return #date
 
     # parse dueTime to format
     def parseTime(self):
-      hr, min = self.dueTime.split(":")
+      hr, min = self.dueTime.toString().split(":")
       time = datetime.time(int(hr),int(min))
       return time
 

@@ -105,7 +105,6 @@ def account():
 @server.route("/home", methods=['GET','POST'])
 @login_required
 def home():
-    form = AddClassForm()
     form2 = AddTaskForm()
     name = current_user.name
     status = current_user.status
@@ -113,10 +112,10 @@ def home():
     user = User.find_by_id(current_user.id)
     # set Notifications for form2 =>> taskForm
     # date format YYYY-MM-DD; time format HH:MM
-    if form2.validate_on_submit:
+    if form2.validate_on_submit():
         notify = AN(form2.taskName, form2.dueDate, form2.dueTime, user.email)
         notify.setNotifications()
-    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status)
+    return render_template("homeScreen.html", form2=form2, name=name, status=status)
 
 
 @server.route("/change-password", methods=['GET','POST'])
