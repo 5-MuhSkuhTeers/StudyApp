@@ -146,7 +146,98 @@
 </div>
 <div id="todo-head-button" style="width: 30%; float:right">
 	<h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
-	<button id="add-buttons">Add Task</button>
+	<button class='btn' id="add-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+	<div class="modal fade" id="addTaskModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content rounded-50 border-0">
+				<form method="POST" action="">
+					{{ form2.hidden_tag() }}
+					<div class="modal-header">
+						<h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Task</h1>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<div class="modal-body">
+
+						<!-- Task Name -->
+						<div class="card-title">
+							{{ form2.taskName.label(class="form-control-label") }}
+							{% if form2.taskName.errors %}
+							{{ form2.taskName(class="form-control form-control-lg is-invalid") }}
+
+							<div class="invalid feedback">
+								{% for error in form2.taskName.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+
+							{% else %}
+							{{ form2.taskName(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<!-- Class Name -->
+						<div class="card-title">
+							{{ form2.className.label(class="form-control-label") }}
+							{% if form2.className.errors %}
+							{{ form2.className(class="form-control form-control-lg is-invalid") }}
+
+							<div class="invalid feedback">
+								{% for error in form2.className.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+
+							{% else %}
+							{{ form2.className(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<!-- Due Date -->
+						<div class="card-title">
+							{{ form2.dueDate.label(class="form-control-label") }}
+							{% if form2.dueDate.errors %}
+							{{ form2.dueDate(class="form-control form-control-lg is-invalid") }}
+
+							<div class="invalid feedback">
+								{% for error in form2.dueTime.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+
+							{% else %}
+							{{ form2.dueDate(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<!-- Due Time -->
+						<div class="card-title">
+							{{ form2.dueTime.label(class="form-control-label") }}
+							{% if form2.dueTime.errors %}
+							{{ form2.dueTime(class="form-control form-control-lg is-invalid") }}
+
+							<div class="invalid feedback">
+								{% for error in form.dueTime.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+
+							{% else %}
+							{{ form2.dueTime(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+
+						<!-- Button -->
+						<div class="form-group" align="center">
+							<div class="btn_login">
+								{{form2.submit(class="btn")}}
+							</div>
+						</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 
 </div>
@@ -165,15 +256,15 @@
 			</thead>
 			<tbody>
 				{% for i in classes %}
-					<tr>
-						<td> {{ i[0] }} </td>
-						<td> {{ i[1] }} </td>
-						<td> {{ i[2] }} </td>
-						<td> {{ i[3] }} </td>
-						<td> {{ i[4] }} </td>
-					</tr>
+				<tr>
+					<td> {{ i[0] }} </td>
+					<td> {{ i[1] }} </td>
+					<td> {{ i[2] }} </td>
+					<td> {{ i[3] }} </td>
+					<td> {{ i[4] }} </td>
+				</tr>
 				{% endfor %}
-				
+
 			</tbody>
 		</table>
 	</div>

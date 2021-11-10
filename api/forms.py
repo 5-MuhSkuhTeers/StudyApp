@@ -57,3 +57,9 @@ class AddClassForm(FlaskForm):
     Th = BooleanField(label='Thursday')
     F = BooleanField(label='Friday')
     submit = SubmitField('Add Class')
+class AddTaskForm(FlaskForm):
+    taskName = StringField(label='Task Name', validators=[DataRequired()])
+    className = StringField(label='Class', validators=[DataRequired()])
+    dueDate = StringField(label='Due Date (YYYY-MM-DD)', validators=[DataRequired()])
+    dueTime = StringField(label='Due Time (HH:MM)', validators=[DataRequired()])
+    submit = SubmitField('Add')

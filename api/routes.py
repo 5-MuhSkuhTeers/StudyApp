@@ -5,6 +5,7 @@ from flask import render_template, flash, redirect, get_flashed_messages, reques
 from flask_login import login_user, login_required, current_user, logout_user
 from api.email import send_reset_email
 from api.models import User
+from api.Notifcations import AssigmentNotifcations as AN
 
 
 @server.route("/", methods=['GET', 'POST'])
@@ -106,16 +107,22 @@ def account():
 @login_required
 def home():
     form = AddClassForm()
+    form2 = AddTaskForm()
     name = current_user.name
     status = current_user.status
-    classes = User.find_by_email("mleishear23@gmail.com").course_schedule()
+    # get user email
+    user = User.find_by_id(current_user.id)
+    classes = User.find_by_email(current_user.email).course_schedule()
     if form.validate_on_submit():
         day = f'{int(form.M.data)}{int(form.T.data)}{int(form.W.data)}{int(form.Th.data)}{int(form.F.data)}'
         id = current_user.id
         Course(user_id=id, course_num=form.className.data, day_of_week=day,
                start_time=form.startTime.data, end_time=form.endTime.data).save_to_db()
         return redirect(url_for('home'))
-    return render_template("homeScreen.html", form=form, name=name, status=status, classes=classes)
+    if form2.validate_on_submit():
+        notify = AN(form2.taskName, form2.dueDate, form2.dueTime, user.email)
+        notify.setNotifications()
+    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes)
 
 
 @server.route("/change-password", methods=['GET','POST'])
