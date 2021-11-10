@@ -8,9 +8,25 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
 </head>
 
-<div class="login-header">
-    Your Account
-</div>
+<nav id= "home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>-->
+  
+    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+      <ul class="navbar-nav mr-auto navbar-custom">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+        </li>
+      </ul>
+
+      <a id ="nav_log_btn" class="nav-link btn-outline-secondary my-2 my-sm-0 my-lg-0" href="{{ url_for('logout') }}">Log Out</a>
+    <!--</div>-->
+  </nav>
 
 <div class="container" style="width:55%;">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -54,6 +70,7 @@
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>
                 <a class="btn btn-primary" href="{{ url_for('changePassword') }}">Change Password</a>
+                <a class="btn btn-danger" href="{{ url_for('delete_account') }}">Delete Account</a>
                 <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
     </form>
 </div>

@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.fields.html5 import TimeField, DateField, DateTimeField
 
 
 class LoginForm(FlaskForm):
@@ -45,3 +46,22 @@ class ChangePasswordForm(FlaskForm):
         EqualTo('new',message='Passwords Must Match')
     ])
     submit = SubmitField('Change Password')
+
+class AddClassForm(FlaskForm):
+    className = StringField(label='Class Name', validators=[DataRequired()])
+    startTime = TimeField(label='Start Time', validators=[DataRequired()])
+    endTime = TimeField(label='End Time', validators=[DataRequired()])
+    M = BooleanField(label='Monday')
+    T = BooleanField(label='Tuesday')
+    W = BooleanField(label='Wednesday')
+    Th = BooleanField(label='Thursday')
+    F = BooleanField(label='Friday')
+    submit = SubmitField('Add Class')
+
+
+class AddTaskForm(FlaskForm):
+    taskName = StringField(label='Assignment', validators=[DataRequired()])
+    className = StringField(label='Class', validators=[DataRequired()])
+    dueDate = DateField(label='Due Date')
+    dueTime = TimeField(label='Due Time')
+    submit = SubmitField('Add')
