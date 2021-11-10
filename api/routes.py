@@ -122,6 +122,9 @@ def home():
     if form2.validate_on_submit():
         notify = AN(form2.taskName, form2.dueDate, form2.dueTime, user.email)
         notify.setNotifications()
+        id = current_user.id
+        Assignment(user_id=id, course=form.className.data, name=taskName.data,
+                  due_date=form.dueDate.data).save_to_db()
     return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes)
 
 
