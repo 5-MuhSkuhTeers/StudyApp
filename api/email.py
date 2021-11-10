@@ -30,7 +30,6 @@ def setNotifications(user, taskName, dueDate, dueTime):
     delivery = datetime.combine(dueDate, dueTime) - timedelta(hours=24)
     current = datetime.now() + timedelta(seconds=30)
     if delivery < current:
-        print('current')
         return requests.post(
             f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
             auth=("api", MAILGUN_API_KEY),

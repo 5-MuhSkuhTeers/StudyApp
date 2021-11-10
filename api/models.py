@@ -2,7 +2,7 @@ from api import db
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as serializer
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, tzinfo
 
 
 class User(db.Model, UserMixin):
@@ -78,8 +78,7 @@ class User(db.Model, UserMixin):
     def user_assignments(self):
         work = []
         for i in self.assignments:
-            if i.due_date >= datetime.now():
-                work.append([i.name,i.due_date])
+            work.append([i.name,i.due_date])
         return work
 
 
