@@ -78,7 +78,7 @@ class User(db.Model, UserMixin):
     def user_assignments(self):
         work = []
         for i in self.assignments:
-            if i.due_date > datetime.now() - timedelta(hours=1):
+            if i.due_date >= datetime.now():
                 work.append([i.name,i.due_date])
         return work
 
