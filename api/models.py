@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(40), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     status = db.Column(db.String(80), nullable=False, default='Hello There!')
-    assignments = db.relationship('Assignment', lazy=True)
-    courses = db.relationship('Course', lazy=True)
+    assignments = db.relationship('Assignment', cascade="all,delete", lazy=True)
+    courses = db.relationship('Course', cascade="all,delete", lazy=True)
 
     def __repr__(self):
         return f"User('{self.id}','{self.name}')"

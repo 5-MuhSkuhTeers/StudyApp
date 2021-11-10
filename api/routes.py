@@ -149,3 +149,13 @@ def changePassword():
             flash("Incorrect password entered", 'danger')
             return redirect(url_for('changePassword'))
     return render_template('changePassword.html', form=form)
+
+
+@server.route("/account/delete", methods=['GET','POST'])
+@login_required
+def delete_account():
+    if current_user.is_authenticated:
+        user = User.find_by_id(current_user.id)
+        user.delete_from_db()
+        flash('Account deleted successfully', 'success')
+    return redirect(url_for('login'))
