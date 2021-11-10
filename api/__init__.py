@@ -6,7 +6,7 @@ from flask_login import LoginManager
 
 
 url = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ \
-        else 'postgresql://postgres:hashedHash2454#@localhost/postgres'
+        else 'postgresql://postgres:password@localhost/postgres'
 if url.startswith("postgres://"):
     url = url.replace("postgres://", "postgresql://", 1)
 
