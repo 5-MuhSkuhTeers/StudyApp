@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     status = db.Column(db.String(80), nullable=False, default='Hello There!')
     assignments = db.relationship('Assignment', cascade="all,delete", lazy=True)
     courses = db.relationship('Course', cascade="all,delete", lazy=True)
+    darkMode = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f"User('{self.id}','{self.name}')"
