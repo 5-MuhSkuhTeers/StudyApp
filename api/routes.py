@@ -90,16 +90,24 @@ def forgotPassword(token):
 @server.route("/account", methods=['GET','POST'])
 @login_required
 def account():
+    darkform = darkModeForm()
     form = UpdateAccountForm()
     name = current_user.name
     status = current_user.status
+    if darkform.validate_on_submit():
+        user = User.find_by_id(current_user.id)
+        user.darkMode = not(user.darkMode)
+        if user.darkMode == True:
+            return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+        else:
+            return redirect(url_for('account'))
     if form.validate_on_submit():
         user = User.find_by_id(current_user.id)
         user.status = form.status.data
         db.session.commit()
         current_user.status = form.status.data
         return redirect(url_for("account"))
-    return render_template("account.html", form=form, name=name, status=status)
+    return render_template("account.html", form=form, darkform = darkform, name=name, status=status)
 
 
 @server.route("/home", methods=['GET','POST'])

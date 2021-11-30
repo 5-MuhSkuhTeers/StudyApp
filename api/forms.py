@@ -65,3 +65,6 @@ class AddTaskForm(FlaskForm):
     dueDate = DateField(label='Due Date')
     dueTime = TimeField(label='Due Time')
     submit = SubmitField('Add')
+
+class darkModeForm(FlaskForm):
+    submit = SubmitField('Dark Mode')

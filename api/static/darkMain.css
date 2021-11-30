@@ -1,0 +1,184 @@
+
+/* Styling for the bar on the login screen*/
+.card {
+    background-color: black;
+}
+.card-body {
+    background-color: rgba(74,215,245,0.34);
+}
+.card-footer{
+    background-color: black;
+}
+.login-header{
+    background-color: rgba(74,215,245,0.34);
+    
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 25px;
+
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: normal;
+
+    
+    width: 100%;
+    height: 100px;    
+}
+
+#login-box{
+    background-color: rgba(154,204,251,0.44);
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+/*login-button*/
+.btn_login{
+    align-content: center;
+}
+
+.btn_reset{
+    align-content: center;
+}
+
+.login-forgot{
+    font-size:15px;
+    color: #1B4E6A;
+}
+
+.login-create{
+    font-size:15px;
+    color: #1B4E6A;
+}
+
+
+.btn{
+    background-color: rgba(27,78,106,0.5);
+    height: 57px;
+    outline: none !important;
+    color: white;
+}
+
+.btn:hover{
+    background-color: rgba(27,78,106,0.7);
+    color: white;
+}
+
+#nav_log_btn{
+    background-color: rgba(27,78,106,0.5);
+    height: 30px;
+    outline: none !important;
+    color: white;
+    line-height: 12px;
+    border-radius: 10px;
+}
+
+#nav_log_btn:hover{
+    background-color: rgba(27,78,106,0.7);
+    color: white;
+}
+
+#home-nav-bar{
+    background-color: rgba(74,215,245,0.34) !important; 
+    
+}
+
+.container{
+    display:flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+}
+
+#calendar-container{
+    width: 50%;
+    min-width: 520px !important;
+    min-height: 380px;
+    height: 70vh;
+    text-align: center;
+    float: left;
+    margin-top: .4%;
+    margin-left: 4%;
+    border-radius: 30px;
+
+    background-color: rgba(154,204,251,0.44);
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    width: 50%;
+}
+
+#todo-container{
+    float:right;
+    width: 30%;
+    min-height: 380px;
+    margin-top: .4%;
+    margin-right: 4%;
+    height: 70vh;
+    border-radius: 30px;
+
+    background-color: rgba(154,204,251,0.44);
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+#container-header{
+    display:inline-block;
+    margin:auto;
+    margin-top: 2% !important;
+    width: 50%;
+    /*min-width: 520px !important;*/
+    /*float:left;*/
+    /*text-align: center;*/
+    margin-left: 4%;
+    
+}
+
+#todo-header{
+    display: inline-block;
+    margin:auto;
+    margin-top: 2% !important;
+    width:30%;
+    margin-right: 4%;
+    margin-left: 4%;
+    /*float:right;*/
+}
+
+#add-buttons{
+    margin:auto;
+    margin-top: 2% !important;
+    margin-right: 4%;
+    float: right;
+}
+
+#class-head-button{
+    margin-left: 4%;
+}
+
+#todo-head-button{
+    margin-right: 4%;
+    
+}
+
+.datatable tr{
+    overflow: hidden;
+    height: 14px;
+    white-space: nowrap;
+    padding: 0%;
+}
+
+.datatable td{
+    padding: 0%;
+    
+}
+
+
