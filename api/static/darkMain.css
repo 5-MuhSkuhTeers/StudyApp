@@ -1,14 +1,5 @@
 
 /* Styling for the bar on the login screen*/
-.card {
-    background-color: black;
-}
-.card-body {
-    background-color: rgba(74,215,245,0.34);
-}
-.card-footer{
-    background-color: black;
-}
 .login-header{
     background-color: rgba(74,215,245,0.34);
     
@@ -181,4 +172,18 @@
     
 }
 
+#outCard {
+    background-color: black;
+}
 
+#login-box{
+    background-color: rgba(154,204,251,0.80);
+}
+
+.form-control{
+    background-color: rgba(0,0,0,0.75);
+}
+
+.form-control-label{
+    color: white;
+}

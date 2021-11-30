@@ -97,6 +97,7 @@ def account():
     if darkform.validate_on_submit():
         user = User.find_by_id(current_user.id)
         user.darkMode = not(user.darkMode)
+        db.session.commit()
         if user.darkMode == True:
             return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
         else:
@@ -107,7 +108,11 @@ def account():
         db.session.commit()
         current_user.status = form.status.data
         return redirect(url_for("account"))
-    return render_template("account.html", form=form, darkform = darkform, name=name, status=status)
+    drkmd = current_user.darkMode
+    if drkmd == True:
+         return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+    else:
+        return render_template("account.html", form=form, darkform = darkform, name=name, status=status)
 
 
 @server.route("/home", methods=['GET','POST'])
@@ -139,7 +144,13 @@ def home():
                   due_date=dueDateTime).save_to_db()
         print(User.find_by_email('conansum@buffalo.edu').user_assignments())
         return redirect(url_for('home'))
-    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+    drkmd = current_user.darkMode
+    if drkmd == True:
+         return render_template("darkModeHome.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+    else:
+        return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+
+    #return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
 
 
 @server.route("/change-password", methods=['GET','POST'])
