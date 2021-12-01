@@ -52,3 +52,15 @@ def setNotifications(user, taskName, dueDate, dueTime):
             "o:deliverytime": f'{delivery.strftime("%a, %d %b %Y %H:%M:%S")} -0500'
         }
     )
+
+def send_break(user):
+    return requests.post(
+        f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+        auth=("api", MAILGUN_API_KEY),
+        data={
+            "from": f"Study App <mailgun@{MAILGUN_DOMAIN}>",
+            "to": [user],
+            "subject": "Time to take a break!",
+            "text": "You've been working hard recently, make sure to take it easy for a little bit. Eat some food, drink some water, or go for a walk. You'll work better if you're well-rested."
+        }
+    )
