@@ -1,7 +1,7 @@
 
 /* Styling for the bar on the login screen*/
 .login-header{
-    background-color: rgba(74,215,245,0.34);
+    background-color: rgba(74,215,245,1);
     
     text-align: center;
     padding-top: 10px;
@@ -79,7 +79,7 @@
 }
 
 #home-nav-bar{
-    background-color: rgba(74,215,245,0.34) !important; 
+    background-color: rgba(74,215,245,1) !important; 
     
 }
 
@@ -100,7 +100,7 @@
     margin-left: 4%;
     border-radius: 30px;
 
-    background-color: rgba(154,204,251,0.44);
+    background-color: rgba(154,204,251,1);
     border: 1px solid black;
     padding: 5px;
     text-align: center;
@@ -116,7 +116,7 @@
     height: 70vh;
     border-radius: 30px;
 
-    background-color: rgba(154,204,251,0.44);
+    background-color: rgba(154,204,251,1);
     border: 1px solid black;
     padding: 5px;
     text-align: center;
@@ -185,5 +185,34 @@
 }
 
 .form-control-label{
+    color: white;
+}
+
+#class-head-button{
+    background-color: black;
+}
+
+#todo-head-button{
+    background-color: black;
+}
+
+.modal-body{
+    background-color: black;
+}
+
+.modal-header{
+    background-color: black;
+}
+
+.btn-dark{
+    background-color:rgba(180, 217, 252, .80);
+    height: 57px;
+    outline: none !important;
+    color: white;
+    border-radius: 10%;
+}
+
+.table{
+    border: 0px rgba(180, 217, 252, 0.6);
     color: white;
 }

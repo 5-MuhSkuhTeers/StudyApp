@@ -167,7 +167,13 @@ def changePassword():
         else:
             flash("Incorrect password entered", 'danger')
             return redirect(url_for('changePassword'))
-    return render_template('changePassword.html', form=form)
+    #return render_template('changePassword.html', form=form)
+    drkmd = current_user.darkMode
+    if drkmd == True:
+         return render_template("darkChangePassword.html", form=form)
+    else:
+        return render_template("changePassword.html", form=form)
+
 
 
 @server.route("/account/delete", methods=['GET','POST'])

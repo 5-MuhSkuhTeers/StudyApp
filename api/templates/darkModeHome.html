@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='darkMain.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -19,7 +19,7 @@
             crossorigin="anonymous"></script>
 
 </head>
-
+<body style="background-color: black;">
 <nav id="home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
     <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,8 @@
 
 <div id="home-page-headers" style="width: 100vw; min-width: 870px;">
     <div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
-        <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>
-        <button class='btn' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+        <h1 id="container-header" class="font-weight-normal" style="color: #ffffff">Class Calendar</h1>
+        <button class='btn-dark' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
 
         <!--Add class modal-->
         <div class="modal fade" id="addClassModal" role="dialog">
@@ -55,8 +55,8 @@
                     <form method="POST" action="">
                         {{ form.hidden_tag() }}
                         <div class="modal-header">
-                            <h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Class</h1>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h1 class="font-weight-normal" style="color: #ffffff; text-align: center;">Add Class</h1>
+                            <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
                         </div>
 
                         <div class="modal-body">
@@ -132,7 +132,7 @@
                             </div>
                             <div class="form-group" align="center">
                                 <div class="btn_login">
-                                    {{ form.submit(class="btn") }}
+                                    {{ form.submit(class="btn-dark") }}
                                 </div>
                             </div>
                         </div>
@@ -145,8 +145,8 @@
     </div>
 </div>
 <div id="todo-head-button" style="width: 30%; float:right">
-    <h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
-    <button class='btn' id="add-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+    <h1 id="todo-header" class="font-weight-normal" style="color: #ffffff">Tasks</h1>
+    <button class='btn-dark' id="add-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
     <div class="modal fade" id="addTaskModal" role="dialog">
         <div class="modal-dialog">
 
@@ -155,8 +155,8 @@
                 <form method="POST" action="">
                     {{ form2.hidden_tag() }}
                     <div class="modal-header">
-                        <h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Task</h1>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h1 class="font-weight-normal" style="color: #ffffff; text-align: center;">Add Task</h1>
+                        <button type="button" class="close" data-dismiss="modal" style="color: #ffffff;">&times;</button>
                     </div>
 
                     <div class="modal-body">
@@ -229,7 +229,7 @@
                         <!-- Button -->
                         <div class="form-group" align="center">
                             <div class="btn_login">
-                                {{ form2.submit(class="btn") }}
+                                {{ form2.submit(class="btn-dark") }}
                             </div>
                         </div>
 
@@ -244,7 +244,7 @@
 <div style="min-width: 870px;">
     <div id="calendar-container" class="container">
 
-        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
+        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered" >
             <thead>
             <tr>
                 <th>Monday</th>
@@ -290,4 +290,5 @@
         </table>
     </div>
 </div>
+</body>
 </html>
