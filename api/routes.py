@@ -107,12 +107,13 @@ def account():
             user.darkMode = not(user.darkMode)
             db.session.commit()
             if user.darkMode == True:
-                return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+                #return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+                return redirect(url_for('account'))
             else:
                 return redirect(url_for('account'))
     drkmd = current_user.darkMode
     if drkmd == True:
-         return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+        return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
     else:
         return render_template("account.html", form=form, darkform = darkform, name=name, status=status)
 
