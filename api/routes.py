@@ -94,20 +94,22 @@ def account():
     form = UpdateAccountForm()
     name = current_user.name
     status = current_user.status
-    if darkform.validate_on_submit():
-        user = User.find_by_id(current_user.id)
-        user.darkMode = not(user.darkMode)
-        db.session.commit()
-        if user.darkMode == True:
-            return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
-        else:
-            return redirect(url_for('account'))
+    
     if form.validate_on_submit():
         user = User.find_by_id(current_user.id)
         user.status = form.status.data
         db.session.commit()
         current_user.status = form.status.data
         return redirect(url_for("account"))
+    else:
+        if darkform.validate_on_submit():
+            user = User.find_by_id(current_user.id)
+            user.darkMode = not(user.darkMode)
+            db.session.commit()
+            if user.darkMode == True:
+                return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+            else:
+                return redirect(url_for('account'))
     drkmd = current_user.darkMode
     if drkmd == True:
          return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
