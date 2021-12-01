@@ -145,7 +145,7 @@ def home():
         dueDateTime = datetime.combine(due_date, due_time)
         Assignment(user_id=id, course=form2.className.data, name=task_name,
                   due_date=dueDateTime).save_to_db()
-        print(User.find_by_email('conansum@buffalo.edu').user_assignments())
+        #print(User.find_by_email('conansum@buffalo.edu').user_assignments())
         return redirect(url_for('home'))
     drkmd = current_user.darkMode
     if drkmd == True:

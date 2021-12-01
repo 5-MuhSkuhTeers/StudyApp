@@ -58,15 +58,15 @@ class User(db.Model, UserMixin):
         schedule = [[],[],[],[],[]]
         for i in courses:
             if i[1][0] == '1':
-                schedule[0].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[0].append(f'''{i[0]} {i[2].strftime("%I %p")}''')
             if i[1][1] == '1':
-                schedule[1].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[1].append(f'''{i[0]} {i[2].strftime("%I %p")}''')
             if i[1][2] == '1':
-                schedule[2].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[2].append(f'''{i[0]} {i[2].strftime("%I %p")}''')
             if i[1][3] == '1':
-                schedule[3].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[3].append(f'''{i[0]} {i[2].strftime("%I %p")}''')
             if i[1][4] == '1':
-                schedule[4].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[4].append(f'''{i[0]} {i[2].strftime("%I %p")}''')
         max_day = max([len(i) for i in schedule])
         matrix = [[[] for m1 in range(5)] for m2 in range(max_day)]
         for i in range(5):
