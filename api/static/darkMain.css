@@ -83,11 +83,6 @@
     
 }
 
-.container{
-    display:flex;
-    flex-wrap: nowrap;
-    flex-grow: 1;
-}
 
 #calendar-container{
     width: 50%;

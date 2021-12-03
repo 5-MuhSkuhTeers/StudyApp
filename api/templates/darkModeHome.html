@@ -44,7 +44,7 @@
 <div id="home-page-headers" style="width: 100vw; min-width: 870px;">
     <div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
         <h1 id="container-header" class="font-weight-normal" style="color: #ffffff">Class Calendar</h1>
-        <button class='btn-dark' id="add-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+        <button class='btn-dark' id="add-class-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
 
         <!--Add class modal-->
         <div class="modal fade" id="addClassModal" role="dialog">
@@ -146,7 +146,7 @@
 </div>
 <div id="todo-head-button" style="width: 30%; float:right">
     <h1 id="todo-header" class="font-weight-normal" style="color: #ffffff">Tasks</h1>
-    <button class='btn-dark' id="add-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+    <button class='btn-dark' id="add-task-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
     <div class="modal fade" id="addTaskModal" role="dialog">
         <div class="modal-dialog">
 
@@ -232,62 +232,108 @@
                                 {{ form2.submit(class="btn-dark") }}
                             </div>
                         </div>
-
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-</div>
 
-</div>
-<div style="min-width: 870px;">
-    <div id="calendar-container" class="container">
-
-        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered" >
-            <thead>
-            <tr>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for i in classes %}
-                <tr>
-                    <td> {{ i[0] }} </td>
-                    <td> {{ i[1] }} </td>
-                    <td> {{ i[2] }} </td>
-                    <td> {{ i[3] }} </td>
-                    <td> {{ i[4] }} </td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
+<div id="calendar-container" class="container" style="width:720px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                Monday
+                <div class="card" style="width:100%;">
+                    <ul class="list-group list-group-flush">
+                        {% for i in classes %}
+                        {% if i[0] != '' %}
+                        <li class="list-group-item">
+                            <h6 style="font-size:100%; text-align:left;">{{ i[0].split(' ')[0] }}</h6>
+                            <h6 style="font-size:80%; text-align:left;">{{ ''.join([i[0].split(' ')[1],i[0].split(' ')[2]]) }}</h6>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm">
+                Tuesday
+                <div class="card" style="width:100%;">
+                    <ul class="list-group list-group-flush">
+                        {% for i in classes %}
+                        {% if i[1] != '' %}
+                        <li class="list-group-item">
+                            <h6 style="font-size:100%; text-align:left;">{{ i[1].split(' ')[0] }}</h6>
+                            <h6 style="font-size:80%; text-align:left;">{{ ''.join([i[1].split(' ')[1],i[1].split(' ')[2]]) }}</h6>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm">
+                Wednesday
+                <div class="card" style="width:100%;">
+                    <ul class="list-group list-group-flush">
+                        {% for i in classes %}
+                        {% if i[2] != '' %}
+                        <li class="list-group-item">
+                            <h6 style="font-size:100%; text-align:left;">{{ i[2].split(' ')[0] }}</h6>
+                            <h6 style="font-size:80%; text-align:left;">{{ ''.join([i[2].split(' ')[1],i[2].split(' ')[2]]) }}</h6>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm">
+                Thursday
+                <div class="card" style="width:100%;">
+                    <ul class="list-group list-group-flush">
+                        {% for i in classes %}
+                        {% if i[3] != '' %}
+                        <li class="list-group-item">
+                            <h6 style="font-size:100%; text-align:left;">{{ i[3].split(' ')[0] }}</h6>
+                            <h6 style="font-size:80%; text-align:left;">{{ ''.join([i[3].split(' ')[1],i[3].split(' ')[2]]) }}</h6>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm">
+                Friday
+                <div class="card" style="width:100%;">
+                    <ul class="list-group list-group-flush">
+                        {% for i in classes %}
+                        {% if i[4] != '' %}
+                        <li class="list-group-item">
+                            <h6 style="font-size:100%; text-align:left;">{{ i[4].split(' ')[0] }}</h6>
+                            <h6 style="font-size:80%; text-align:left;">{{ ''.join([i[4].split(' ')[1],i[4].split(' ')[2]]) }}</h6>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-
-    <div id="todo-container" class="container">
-        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>Assignment</th>
-                <th>Due Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for i in assignments %}
-                <tr>
-                    <td> {{ i[0] }} </td>
-                    <td> {{ i[1] }} </td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
+<div id="todo-container" class="container">
+    <div class="container">
+        Assignments
+        <div class="card" style="width:100%;">
+            <ul class="list-group list-group-flush">
+                {% for i in assignments %}
+                <li class="list-group-item">
+                    <h6 style="font-size:100%; text-align:left;">{{ i[0] }}</h6>
+                    <h6 style="font-size:80%; text-align:left;">{{ i[1] }}</h6>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 </body>
