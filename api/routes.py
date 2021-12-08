@@ -3,7 +3,7 @@ from api.models import *
 from api.forms import *
 from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
-from api.email import send_reset_email, setNotifications
+from api.email import send_reset_email, setNotifications, send_sleep, send_break
 from api.models import User
 
 
@@ -19,6 +19,8 @@ def login():
             user = User.find_by_email(form.email.data)
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
+                send_break(form.email.data)
+                send_sleep(form.email.data)
                 return redirect('home')
             else:
                 flash("Incorrect password entered", 'danger')
@@ -48,7 +50,10 @@ def createAccount():
             user = User(email=form.email.data, name=form.name.data,
                         password=bcrypt.generate_password_hash(form.password.data).decode('utf-8'))
             user.save_to_db()
+            send_break(form.email.data)
+            send_sleep(form.email.data)
             flash("Account creation successful",'success')
+
             return redirect('login')
     return render_template("createAccount.html",form = form)
 #needs to change in order to be able to send the email
@@ -90,16 +95,32 @@ def forgotPassword(token):
 @server.route("/account", methods=['GET','POST'])
 @login_required
 def account():
+    darkform = darkModeForm()
     form = UpdateAccountForm()
     name = current_user.name
     status = current_user.status
+    
     if form.validate_on_submit():
         user = User.find_by_id(current_user.id)
         user.status = form.status.data
         db.session.commit()
         current_user.status = form.status.data
         return redirect(url_for("account"))
-    return render_template("account.html", form=form, name=name, status=status)
+    else:
+        if darkform.validate_on_submit():
+            user = User.find_by_id(current_user.id)
+            user.darkMode = not(user.darkMode)
+            db.session.commit()
+            if user.darkMode == True:
+                #return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+                return redirect(url_for('account'))
+            else:
+                return redirect(url_for('account'))
+    drkmd = current_user.darkMode
+    if drkmd == True:
+        return render_template("darkModeAccount.html", form=form, darkform = darkform, name=name, status=status)
+    else:
+        return render_template("account.html", form=form, darkform = darkform, name=name, status=status)
 
 
 @server.route("/home", methods=['GET','POST'])
@@ -116,22 +137,35 @@ def home():
     if form.validate_on_submit():
         day = f'{int(form.M.data)}{int(form.T.data)}{int(form.W.data)}{int(form.Th.data)}{int(form.F.data)}'
         id = current_user.id
-        Course(user_id=id, course_num=form.className.data, day_of_week=day,
-               start_time=form.startTime.data, end_time=form.endTime.data).save_to_db()
+        course = Course(user_id=id, course_num=form.className.data, day_of_week=day,
+                        start_time=form.startTime.data, end_time=form.endTime.data)
+        if user.check_availability(course):
+            course.save_to_db()
+        else:
+            flash("Class conflict detected","danger")
         return redirect(url_for('home'))
-    if form2.validate_on_submit():
-        email = current_user.email
-        task_name = form2.taskName.data
-        due_date = form2.dueDate.data
-        due_time = form2.dueTime.data
-        setNotifications(user=email,taskName=task_name,dueDate=due_date,dueTime=due_time)
-        id = current_user.id
-        dueDateTime = datetime.combine(due_date, due_time)
-        Assignment(user_id=id, course=form2.className.data, name=task_name,
-                  due_date=dueDateTime).save_to_db()
-        print(User.find_by_email('conansum@buffalo.edu').user_assignments())
-        return redirect(url_for('home'))
-    return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+    try:
+        if form2.validate_on_submit():
+            email = current_user.email
+            task_name = form2.taskName.data
+            due_date = form2.dueDate.data
+            due_time = form2.dueTime.data
+            setNotifications(user=email,taskName=task_name,dueDate=due_date,dueTime=due_time)
+            id = current_user.id
+            dueDateTime = datetime.combine(due_date, due_time)
+            Assignment(user_id=id, course=form2.className.data, name=task_name,
+                      due_date=dueDateTime).save_to_db()
+            #print(User.find_by_email('conansum@buffalo.edu').user_assignments())
+            return redirect(url_for('home'))
+    except:
+        pass
+    drkmd = current_user.darkMode
+    if drkmd == True:
+         return render_template("darkModeHome.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+    else:
+        return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
+
+    #return render_template("homeScreen.html", form=form, form2=form2, name=name, status=status, classes=classes, assignments=assignments)
 
 
 @server.route("/change-password", methods=['GET','POST'])
@@ -148,7 +182,13 @@ def changePassword():
         else:
             flash("Incorrect password entered", 'danger')
             return redirect(url_for('changePassword'))
-    return render_template('changePassword.html', form=form)
+    #return render_template('changePassword.html', form=form)
+    drkmd = current_user.darkMode
+    if drkmd == True:
+         return render_template("darkChangePassword.html", form=form)
+    else:
+        return render_template("changePassword.html", form=form)
+
 
 
 @server.route("/account/delete", methods=['GET','POST'])

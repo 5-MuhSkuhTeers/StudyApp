@@ -13,8 +13,10 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(40), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     status = db.Column(db.String(80), nullable=False, default='Hello There!')
+    darkMode = db.Column(db.Boolean, nullable=False, default=False)
     assignments = db.relationship('Assignment', cascade="all,delete", lazy=True)
     courses = db.relationship('Course', cascade="all,delete", lazy=True)
+    
 
     def __repr__(self):
         return f"User('{self.id}','{self.name}')"
@@ -51,20 +53,20 @@ class User(db.Model, UserMixin):
     def course_schedule(self):
         courses = []
         for i in self.courses:
-            courses.append([i.course_num,i.day_of_week,i.start_time])
+            courses.append([i.course_num,i.day_of_week,i.start_time,i.end_time])
         courses.sort(key=lambda x: x[2])
         schedule = [[],[],[],[],[]]
         for i in courses:
             if i[1][0] == '1':
-                schedule[0].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[0].append(f'''{i[0]} {i[2].strftime("%I:%M %p")} {i[3].strftime("%I:%M %p")}''')
             if i[1][1] == '1':
-                schedule[1].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[1].append(f'''{i[0]} {i[2].strftime("%I:%M %p")} {i[3].strftime("%I:%M %p")}''')
             if i[1][2] == '1':
-                schedule[2].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[2].append(f'''{i[0]} {i[2].strftime("%I:%M %p")} {i[3].strftime("%I:%M %p")}''')
             if i[1][3] == '1':
-                schedule[3].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[3].append(f'''{i[0]} {i[2].strftime("%I:%M %p")} {i[3].strftime("%I:%M %p")}''')
             if i[1][4] == '1':
-                schedule[4].append(f'''{i[0]} {i[2].strftime("%-I %p")}''')
+                schedule[4].append(f'''{i[0]} {i[2].strftime("%I:%M %p")} {i[3].strftime("%I:%M %p")}''')
         max_day = max([len(i) for i in schedule])
         matrix = [[[] for m1 in range(5)] for m2 in range(max_day)]
         for i in range(5):
@@ -80,6 +82,21 @@ class User(db.Model, UserMixin):
         for i in self.assignments:
             work.append([i.name,i.due_date])
         return work
+
+    def check_availability(self, course):
+        courses = self.courses
+        for i in courses:
+            day = False
+            for j in range(5):
+                if i.day_of_week[j] == course.day_of_week[j]:
+                    day = True
+            first = i.end_time > course.start_time
+            second = i.start_time < course.end_time
+            print(first,second,day)
+            if first and second and day:
+                return False
+        return True
+
 
 
 class Assignment(db.Model):
@@ -108,13 +125,13 @@ class Course(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    course_num = db.Column(db.String(10), nullable=False)
+    course_num = db.Column(db.String(6), nullable=False)
     day_of_week = db.Column(db.String(5), nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
 
     def __repr__(self):
-        return f"Course('{self.user_id}','{self.course_num}','{self.start_time}')"
+        return f"Course('{self.user_id}','{self.course_num}','{self.start_time}','{self.end_time}')"
 
     def save_to_db(self):
         db.session.add(self)
@@ -123,3 +140,4 @@ class Course(db.Model):
     def delete_from_db(self):
         db.session.delete(self)
         db.session.commit()
+

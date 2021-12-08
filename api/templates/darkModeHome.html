@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='darkMain.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -19,7 +19,7 @@
             crossorigin="anonymous"></script>
 
 </head>
-
+<body style="background-color: black;">
 <nav id="home-nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 20px;">StudyApp</a>
     <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,108 +53,112 @@
     {% endwith %}
 </div>
 
-<div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
-    <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>
-    <button class='btn' id="add-class-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
-    <div class="modal fade" id="addClassModal" role="dialog">
-        <div class="modal-dialog">
+<div id="home-page-headers" style="width: 100vw; min-width: 870px;">
+    <div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
+        <h1 id="container-header" class="font-weight-normal" style="color: #ffffff">Class Calendar</h1>
+        <button class='btn-dark' id="add-class-buttons" data-toggle="modal" data-target="#addClassModal">Add Class</button>
 
-            <!-- Modal content-->
-            <div class="modal-content rounded-50 border-0">
-                <form method="POST" action="">
-                    {{ form.hidden_tag() }}
-                    <div class="modal-header">
-                        <h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Class</h1>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+        <!--Add class modal-->
+        <div class="modal fade" id="addClassModal" role="dialog">
+            <div class="modal-dialog">
 
-                    <div class="modal-body">
+                <!-- Modal content-->
+                <div class="modal-content rounded-50 border-0">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <div class="modal-header">
+                            <h1 class="font-weight-normal" style="color: #ffffff; text-align: center;">Add Class</h1>
+                            <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
 
 
-                        <div class="card-title">
-                            {{ form.className.label(class="form-control-label") }}
-                            {% if form.className.errors %}
-                            {{ form.className(class="form-control form-control-lg is-invalid") }}
+                            <div class="card-title">
+                                {{ form.className.label(class="form-control-label") }}
+                                {% if form.className.errors %}
+                                    {{ form.className(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form.className.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
+                                    <div class="invalid feedback">
+                                        {% for error in form.className.errors %}
+                                            <span style="color: #ffffff;">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                {% else %}
+                                    {{ form.className(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
 
-                            {% else %}
-                            {{ form.className(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
+                            <div class="card-title">
+                                {{ form.startTime.label(class="form-control-label") }}
+                                {% if form.startTime.errors %}
+                                    {{ form.startTime(class="form-control form-control-lg is-invalid") }}
 
-                        <div class="card-title">
-                            {{ form.startTime.label(class="form-control-label") }}
-                            {% if form.startTime.errors %}
-                            {{ form.startTime(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid feedback">
+                                        {% for error in form.startTime.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
 
-                            <div class="invalid feedback">
-                                {% for error in form.startTime.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
+                                {% else %}
+                                    {{ form.startTime(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="card-title">
+                                {{ form.endTime.label(class="form-control-label") }}
+                                {% if form.endTime.errors %}
+                                    {{ form.endTime(class="form-control form-control-lg is-invalid") }}
+
+                                    <div class="invalid feedback">
+                                        {% for error in form.endTime.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                {% else %}
+                                    {{ form.endTime(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
 
-                            {% else %}
-                            {{ form.startTime(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-                        <div class="card-title">
-                            {{ form.endTime.label(class="form-control-label") }}
-                            {% if form.endTime.errors %}
-                            {{ form.endTime(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form.endTime.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
+                            <div class="card-title">
+                                {{ form.M.label(class="form-control-label") }}
+                                {{ form.M() }}
                             </div>
-
-                            {% else %}
-                            {{ form.endTime(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-
-
-                        <div class="card-title">
-                            {{ form.M.label(class="form-control-label") }}
-                            {{ form.M() }}
-                        </div>
-                        <div class="card-title">
-                            {{ form.T.label(class="form-control-label") }}
-                            {{ form.T() }}
-                        </div>
-                        <div class="card-title">
-                            {{ form.W.label(class="form-control-label") }}
-                            {{ form.W() }}
-                        </div>
-                        <div class="card-title">
-                            {{ form.Th.label(class="form-control-label") }}
-                            {{ form.Th() }}
-                        </div>
-                        <div class="card-title">
-                            {{ form.F.label(class="form-control-label") }}
-                            {{ form.F() }}
-                        </div>
-                        <div class="form-group" align="center">
-                            <div class="btn_login">
-                                {{ form.submit(class="btn") }}
+                            <div class="card-title">
+                                {{ form.T.label(class="form-control-label") }}
+                                {{ form.T() }}
+                            </div>
+                            <div class="card-title">
+                                {{ form.W.label(class="form-control-label") }}
+                                {{ form.W() }}
+                            </div>
+                            <div class="card-title">
+                                {{ form.Th.label(class="form-control-label") }}
+                                {{ form.Th() }}
+                            </div>
+                            <div class="card-title">
+                                {{ form.F.label(class="form-control-label") }}
+                                {{ form.F() }}
+                            </div>
+                            <div class="form-group" align="center">
+                                <div class="btn_login">
+                                    {{ form.submit(class="btn-dark") }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
             </div>
-
         </div>
+
     </div>
 </div>
-
 <div id="todo-head-button" style="width: 30%; float:right">
-    <h1 id="todo-header" class="font-weight-normal" style="color: #1B4E6A">Tasks</h1>
-    <button class='btn' id="add-task-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+    <h1 id="todo-header" class="font-weight-normal" style="color: #ffffff">Tasks</h1>
+    <button class='btn-dark' id="add-task-buttons" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
     <div class="modal fade" id="addTaskModal" role="dialog">
         <div class="modal-dialog">
 
@@ -163,8 +167,8 @@
                 <form method="POST" action="">
                     {{ form2.hidden_tag() }}
                     <div class="modal-header">
-                        <h1 class="font-weight-normal" style="color: #1B4E6A; text-align: center;">Add Task</h1>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h1 class="font-weight-normal" style="color: #ffffff; text-align: center;">Add Task</h1>
+                        <button type="button" class="close" data-dismiss="modal" style="color: #ffffff;">&times;</button>
                     </div>
 
                     <div class="modal-body">
@@ -173,71 +177,71 @@
                         <div class="card-title">
                             {{ form2.taskName.label(class="form-control-label") }}
                             {% if form2.taskName.errors %}
-                            {{ form2.taskName(class="form-control form-control-lg is-invalid") }}
+                                {{ form2.taskName(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form2.taskName.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                                <div class="invalid feedback">
+                                    {% for error in form2.taskName.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
 
                             {% else %}
-                            {{ form2.taskName(class="form-control form-control-lg") }}
+                                {{ form2.taskName(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
                         <!-- Class Name -->
                         <div class="card-title">
                             {{ form2.className.label(class="form-control-label") }}
                             {% if form2.className.errors %}
-                            {{ form2.className(class="form-control form-control-lg is-invalid") }}
+                                {{ form2.className(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form2.className.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                                <div class="invalid feedback">
+                                    {% for error in form2.className.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
 
                             {% else %}
-                            {{ form2.className(class="form-control form-control-lg") }}
+                                {{ form2.className(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
                         <!-- Due Date -->
                         <div class="card-title">
                             {{ form2.dueDate.label(class="form-control-label") }}
                             {% if form2.dueDate.errors %}
-                            {{ form2.dueDate(class="form-control form-control-lg is-invalid") }}
+                                {{ form2.dueDate(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form2.dueDate.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                                <div class="invalid feedback">
+                                    {% for error in form2.dueDate.errors %}
+                                        <span style="color: #ffffff;">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
 
                             {% else %}
-                            {{ form2.dueDate(class="form-control form-control-lg") }}
+                                {{ form2.dueDate(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
                         <!-- Due Time -->
                         <div class="card-title">
                             {{ form2.dueTime.label(class="form-control-label") }}
                             {% if form2.dueTime.errors %}
-                            {{ form2.dueTime(class="form-control form-control-lg is-invalid") }}
+                                {{ form2.dueTime(class="form-control form-control-lg is-invalid") }}
 
-                            <div class="invalid feedback">
-                                {% for error in form.dueTime.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                                <div class="invalid feedback">
+                                    {% for error in form.dueTime.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
 
                             {% else %}
-                            {{ form2.dueTime(class="form-control form-control-lg") }}
+                                {{ form2.dueTime(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
                         <!-- Button -->
                         <div class="form-group" align="center">
                             <div class="btn_login">
-                                {{ form2.submit(class="btn") }}
+                                {{ form2.submit(class="btn-dark") }}
                             </div>
                         </div>
                     </div>
@@ -350,5 +354,5 @@
         </div>
     </div>
 </div>
-
+</body>
 </html>
