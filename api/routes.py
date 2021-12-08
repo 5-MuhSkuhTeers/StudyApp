@@ -3,7 +3,7 @@ from api.models import *
 from api.forms import *
 from flask import render_template, flash, redirect, get_flashed_messages, request, url_for
 from flask_login import login_user, login_required, current_user, logout_user
-from api.email import send_reset_email, setNotifications
+from api.email import send_reset_email, setNotifications, send_break, send_sleep
 from api.models import User
 
 
@@ -18,6 +18,9 @@ def login():
         if User.find_by_email(form.email.data):
             user = User.find_by_email(form.email.data)
             if bcrypt.check_password_hash(user.password, form.password.data):
+                print("Login")
+                send_break(form.email.data)
+                send_sleep(form.email.data)
                 login_user(user)
                 return redirect('home')
             else:
@@ -49,6 +52,9 @@ def createAccount():
                         password=bcrypt.generate_password_hash(form.password.data).decode('utf-8'))
             user.save_to_db()
             flash("Account creation successful",'success')
+            print("Create account")
+            send_break(form.email.data)
+            send_sleep(form.email.data)
             return redirect('login')
     return render_template("createAccount.html",form = form)
 #needs to change in order to be able to send the email
