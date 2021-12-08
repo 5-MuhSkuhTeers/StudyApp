@@ -41,6 +41,17 @@
     <!--</div>-->
 </nav>
 
+<div class="container" style="width:100%;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
 
 <div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
     <h1 id="container-header" class="font-weight-normal" style="color: #1B4E6A">Class Calendar</h1>

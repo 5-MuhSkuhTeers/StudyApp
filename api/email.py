@@ -1,12 +1,45 @@
 import requests, os
 from flask import url_for
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 MAILGUN_DOMAIN = os.environ['MAILGUN_TEST_DOMAIN'] if 'MAILGUN_TEST_DOMAIN' in os.environ \
     else 'DOMAIN'
 MAILGUN_API_KEY = os.environ['MAILGUN_TEST_API'] if 'MAILGUN_TEST_API' in os.environ \
     else 'API_KEY'
 
+def send_break(user):
+    noon = time(12, 0, 0)
+    tomorrow = datetime.now() + timedelta(hours=24)
+    delivery = datetime.combine(tomorrow, noon)
+    print("SCHEDULED BREAK")
+    return requests.post(
+        f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+        auth=("api", MAILGUN_API_KEY),
+        data={
+            "from": f"Study App <mailgun@{MAILGUN_DOMAIN}>",
+            "to": [user],
+            "subject": "Time to take a break!",
+            "text": "You've been working hard recently, make sure to take it easy for a little bit. Eat some food, drink some water, or go for a walk. You'll work better if you're well-rested.",
+            "o:deliverytime": f'{delivery.strftime("%a, %d %b %Y %H:%M:%S")} -0500'
+        }
+    )
+
+def send_sleep(user):
+    bed_time = time(23, 0, 0)
+    tomorrow = datetime.now() + timedelta(hours=24)
+    delivery = datetime.combine(tomorrow, bed_time)
+    print("SCHEDULED SLEEP")
+    return requests.post(
+        f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+        auth=("api", MAILGUN_API_KEY),
+        data={
+            "from": f"Study App <mailgun@{MAILGUN_DOMAIN}>",
+            "to": [user],
+            "subject": "Time for bed!",
+            "text": "You've been working hard all day, now it's time to get to bed. Getting enough sleep will make you more productive, and will help you acheive a healthy lifestyle!",
+            "o:deliverytime": f'{delivery.strftime("%a, %d %b %Y %H:%M:%S")} -0500'
+        }
+    )
 
 def send_reset_email(user, token):
     return requests.post(

@@ -83,6 +83,21 @@ class User(db.Model, UserMixin):
             work.append([i.name,i.due_date])
         return work
 
+    def check_availability(self, course):
+        courses = self.courses
+        for i in courses:
+            day = False
+            for j in range(5):
+                if i.day_of_week[j] == course.day_of_week[j]:
+                    day = True
+            first = i.end_time > course.start_time
+            second = i.start_time < course.end_time
+            print(first,second,day)
+            if first and second and day:
+                return False
+        return True
+
+
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
@@ -110,7 +125,7 @@ class Course(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    course_num = db.Column(db.String(10), nullable=False)
+    course_num = db.Column(db.String(6), nullable=False)
     day_of_week = db.Column(db.String(5), nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
@@ -125,3 +140,4 @@ class Course(db.Model):
     def delete_from_db(self):
         db.session.delete(self)
         db.session.commit()
+

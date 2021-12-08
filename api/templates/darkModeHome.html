@@ -41,6 +41,18 @@
     <!--</div>-->
 </nav>
 
+<div class="container" style="width:100%;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
 <div id="home-page-headers" style="width: 100vw; min-width: 870px;">
     <div id="class-head-button" style="min-width: 520px; width: 50%; float:left ">
         <h1 id="container-header" class="font-weight-normal" style="color: #ffffff">Class Calendar</h1>
@@ -69,7 +81,7 @@
 
                                     <div class="invalid feedback">
                                         {% for error in form.className.errors %}
-                                            <span>{{ error }}</span>
+                                            <span style="color: #ffffff;">{{ error }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -201,7 +213,7 @@
 
                                 <div class="invalid feedback">
                                     {% for error in form2.dueDate.errors %}
-                                        <span>{{ error }}</span>
+                                        <span style="color: #ffffff;">{{ error }}</span>
                                     {% endfor %}
                                 </div>
 
