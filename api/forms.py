@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from wtforms.fields.html5 import TimeField, DateField, DateTimeField
+from datetime import datetime
 
 
 class LoginForm(FlaskForm):
@@ -65,6 +66,11 @@ class AddTaskForm(FlaskForm):
     dueDate = DateField(label='Due Date')
     dueTime = TimeField(label='Due Time')
     submit = SubmitField('Add')
+
+    def validate_dueDate(form, field):
+        dateAndTime = datetime.combine(form.dueDate.data, form.dueTime.data)
+        if dateAndTime < datetime.now():
+            raise ValidationError("Date must be in the future")
 
 class darkModeForm(FlaskForm):
     submit = SubmitField('Dark Mode')
